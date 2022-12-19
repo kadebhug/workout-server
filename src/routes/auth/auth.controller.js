@@ -8,6 +8,7 @@ const User = db.user;
 let secret = process.env.SECRET;
 
 exports.register = async (req, res, next) => {
+    let role = req.body.role;
     let user = new User({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
@@ -20,9 +21,9 @@ exports.register = async (req, res, next) => {
         if(err) {
             return res.status(500).send({message: err});
         }
-        if(req.body.role) {
+        if(role) {
             Role.find({
-                code: { $in: req.body.role },
+                code: { $in: role },
             },
             (err, roles) => {
                 if(err) {
@@ -72,16 +73,16 @@ exports.login = async (req, res) => {
         if(!passwordIsValid) {{
             return res.status(500).send({ message: "Wrong password"});
         }}
-
-        let token = jwt.sign({ id: user.id }, secret, {
-            expiresIn: 86400
-        })
-
+        
         let authorities = [];
 
         for (let i = 0; i < user.roles.length; i++) {
             authorities.push(user.roles[i].code);
         }
+
+        let token = jwt.sign({ id: user.id, role: authorities }, secret, {
+            expiresIn: 86400
+        })
 
         res.status(200).send({
             id: user._id,

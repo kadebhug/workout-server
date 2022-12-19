@@ -1,6 +1,6 @@
 require("dotenv").config() // load .env variables
 const mongoose = require("mongoose") //import fresh mongoose object
-const { roleSeeds } = require('./seeds');
+const { roleSeeds, userSeeds } = require('./seeds');
 const { DATABASE_URL } = process.env 
 
 // CONNECT TO MONGO
@@ -8,6 +8,7 @@ mongoose.connect = mongoose.connect(DATABASE_URL, {useNewUrlParser: true, useUni
                     .then(() => {
                         console.log("YAY");
                         roleSeeds();
+                        userSeeds();
                     })
                     .catch(error => {
                         console.error('AWW: ', error)
