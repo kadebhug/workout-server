@@ -7,6 +7,8 @@ db.mongoose = mongoose;
 
 db.role = require("./role.mongo");
 db.user = require("./user.mongo");
+db.workout = require("./workout.mongo");
+db.exercise = require("./exercise.mongo");
 
 db.ROLES = ["ADMIN", "TRAINER", "USER"];
 

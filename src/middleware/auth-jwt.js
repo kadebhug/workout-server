@@ -28,56 +28,6 @@ verifyToken = (roles_allowed) => {
   }
 };
 
-isAdmin = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      return res.status(500).send({ message: err });
-    }
-    Role.find(
-      {
-        _id: { $in: user.roles[0] }
-      },
-      (err, roles) => {
-        if (err) {
-          return res.status(500).send({ message: err });
-        }
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].code === "ADMIN") {
-            return next();
-          }
-        }
-        return res.status(403).send({ message: "Require Admin Role!" });
-      }  
-    );
-  });
-};
-
-isTrainer = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      return res.status(500).send({ message: err });
-    }
-    Role.find(
-      {
-        _id: { $in: user.roles }
-      },
-      (err, roles) => {
-        if (err) {
-          return res.status(500).send({ message: err });
-        }
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].code === "TRAINER") {
-            return next();
-          }
-        }
-        return res.status(403).send({ message: "Require Trainer Role!" });
-      }
-    );
-  });
-};
-
 module.exports = {
-  verifyToken,
-  isAdmin,
-  isTrainer
+  verifyToken
 }

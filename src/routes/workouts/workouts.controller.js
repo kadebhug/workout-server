@@ -1,43 +1,33 @@
 const db = require("../../models/index");
 const mongoose = require("mongoose");
-const Exercise = db.exercise;
+const Workout = db.workout;
 
-exports.createExercise = async (req, res, next) => {
+exports.createWorkout = async (req, res, next) => {
     try {
-        if(req.body.personal_exercise){
-            await Exercise.create({
-                name: req.body.name,
-                creator_id: req.userId
-            }, (err, workout) => {
-                if(err) return res.status(500).send({ 
-                    message: "Error creating a personal exercise"
-                })
-    
-                return res.send({ 
-                    message: "Successfully created a personal exercise",
-                })
-            });
-        }else{
-            await Exercise.create({
-                name: req.body.name
-            }, (err, workout) => {
-                if(err) return res.status(500).send({ 
-                    message: "Error creating an exercise"
-                })
-    
-                return res.send({ 
-                    message: "Successfully created an exercise",
-                })
-            });
-        }
+        await Workout.create({
+            name: req.body.name,
+            name: req.body?.description,
+            name: req.body?.instruction,
+            name: req.body?.muscle_group,
+            name: req.body?.equipment,
+            creator_id: req.userId
+        }, (err, workout) => {
+            if(err) return res.status(500).send({ 
+                message: "Error creating a workout"
+            })
+
+            return res.send({ 
+                message: "Successfully created a workout",
+            })
+        });
     } catch (error) {
         return res.status(500).send({ 
-            message: "Error creating an exercise"
+            message: "Error creating a workout"
         })
     }
 }
 
-exports.viewExercise = async (req, res, next) => {
+exports.viewWorkout = async (req, res, next) => {
     console.log(req.params);
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -58,7 +48,7 @@ exports.viewExercise = async (req, res, next) => {
     }
 }
 
-exports.deleteExercise = async (req, res, next) => {
+exports.deleteWorkout = async (req, res, next) => {
     console.log(req.params.id);
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
