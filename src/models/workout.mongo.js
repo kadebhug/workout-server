@@ -14,6 +14,9 @@ const workoutSchema = new mongoose.Schema({
     difficulty: {
         type: String
     },
+    is_public: {
+        type: Boolean
+    },
     creator_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"

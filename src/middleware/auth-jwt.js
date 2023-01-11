@@ -18,6 +18,7 @@ verifyToken = (roles_allowed) => {
       console.log("DECODED: ", decoded);
       console.log("ALLOWED ROLES: ", roles_allowed);
       req.userId = decoded.id;
+      req.role = decoded.role[0];
       if (roles_allowed.length && !roles_allowed.includes(decoded.role[0])) {
         // user's role is not authorized
         console.log("NOT ALOOWED");

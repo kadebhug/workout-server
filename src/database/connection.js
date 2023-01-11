@@ -17,8 +17,8 @@ mongoose.connect = mongoose.connect(DATABASE_URL, {useNewUrlParser: true, useUni
 
 // CONNECTION EVENTS
 mongoose.connection
-.on("open", () => console.log("DATABASE STATE:      ", "Connection Open"))
-.on("close", () => console.log("DATABASE STATE: ", "Connection Open"))
+.on("open", () => console.log("DATABASE STATE: ", "Connection Open"))
+.on("close", () => console.log("DATABASE STATE: ", "Connection Closed"))
 .on("error", (error) => console.log("DATABASE STATE: ", error))
 
 // EXPORT CONNECTION

@@ -1,33 +1,21 @@
 const db = require("../../models/index");
 const User = db.user;
 
-exports.getAllUsersIncludingAdmin = async (req, res, next) => {
+exports.getAllUsers = async (req, res, next) => {
     try {
+        console.log("REQ: ", req.role);
         const allUsers = await User
-                            .find({})
-                            .populate({
-                                path: 'roles',
-                                select: 'display code -_id'
-                            });
-        return res.send({ 
-            message: "Successfully got all users",
-            data: allUsers
+        .find({}, {
+            roles: {
+                "$elemMatch":{
+                    "code": "ADMIN"
+                }
+            }
         })
-    } catch (error) {
-        return res.status(500).send({ 
-            message: "Error getting all users"
-        })
-    }
-}
-
-exports.getAllUsersOnly = async (req, res, next) => {
-    try {
-        const allUsers = await User
-                            .find({})
-                            .populate({
-                                path: 'roles',
-                                select: 'display code -_id'
-                            });
+                            // .populate({
+                            //     path: 'roles',
+                            //     select: 'display code -_id'
+                            // });
         return res.send({ 
             message: "Successfully got all users",
             data: allUsers
@@ -42,16 +30,14 @@ exports.getAllUsersOnly = async (req, res, next) => {
 exports.getSingleUser = async (req, res, next) => {
     try {
         const singleUser = await User
-                            .find({
-                                
-                            })
+                            .findOne({_id: req.params.id})
                             .populate({
                                 path: 'roles',
                                 select: 'display code -_id'
                             });
         return res.send({ 
-            message: "Successfully got all users",
-            data: allUsers
+            message: "Successfully got user",
+            data: singleUser
         })
     } catch (error) {
         return res.status(500).send({ 
