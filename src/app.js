@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const authRouter = require('./routes/auth/auth.router');
 const userRouter = require('./routes/users/users.router');
 const workoutRouter = require('./routes/workouts/workouts.router');
+const exerciseRouter = require('./routes/exercises/exercises.router');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/workout', workoutRouter);
+app.use('/exercise', exerciseRouter);
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
 });
