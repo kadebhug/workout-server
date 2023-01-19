@@ -1,9 +1,10 @@
 const db = require("../models/index");
 const { passwordHash } = require('../services/encryption');
-const { ALL_ROLES, USERS, MUSCLE_GROUPS } = require('../constants/index');
+const { ALL_ROLES, USERS, MUSCLE_GROUPS, EXERCISE_TYPES } = require('../constants/index');
 const Role = db.role;
 const User = db.user;
 const MuscleGroup = db.muscle_group;
+const ExerciseType = db.exercise_type;
 
 const roleSeeds = () => {
     Role.estimatedDocumentCount((err, count) => {
@@ -96,9 +97,29 @@ const muscleGroupSeeds = () => {
         }
     });
 }
+const exerciseTypeSeeds = () => {
+    ExerciseType.estimatedDocumentCount((err, count) => {
+        if (!err && count === 0) {
+            for (let index = 0; index < EXERCISE_TYPES.length; index++) {
+                const exercise_type = EXERCISE_TYPES[index];
+                new ExerciseType({
+                    display: exercise_type.display,
+                    code: exercise_type.code
+                }).save(err => {
+                    if (err) {
+                        console.log("error", err);
+                    }
+    
+                    console.log(`added ${exercise_type.code} to ExerciseType collection`);
+                });
+            }
+        }
+    });
+}
 
 module.exports = {
     roleSeeds,
     userSeeds,
-    muscleGroupSeeds
+    muscleGroupSeeds,
+    exerciseTypeSeeds
 }
