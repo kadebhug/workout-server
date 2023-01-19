@@ -6,10 +6,10 @@ exports.createWorkout = async (req, res, next) => {
     try {
         await Workout.create({
             name: req.body.name,
-            name: req.body?.description,
-            name: req.body?.instruction,
-            name: req.body?.muscle_group,
-            name: req.body?.equipment,
+            description: req.body?.description,
+            instruction: req.body?.instruction,
+            muscle_group: req.body?.muscle_group,
+            equipment: req.body?.equipment,
             creator_id: req.userId
         }, (err, workout) => {
             if(err) return res.status(500).send({ 
