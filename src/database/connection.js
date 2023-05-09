@@ -1,15 +1,16 @@
 require("dotenv").config() // load .env variables
 const mongoose = require("mongoose") //import fresh mongoose object
-const { roleSeeds, userSeeds, muscleGroupSeeds, exerciseTypeSeeds } = require('./seeds');
-const { DATABASE_URL } = process.env 
+const { roleSeeds, userSeeds, muscleGroupSeeds, exerciseTypeSeeds, focusSeeds } = require('./seeds');
+const { DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER } = process.env 
 
 // CONNECT TO MONGO
-mongoose.connect = mongoose.connect(DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect = mongoose.connect(`mongodb://localhost:27017/test`, {useNewUrlParser: true, useUnifiedTopology: true})
                     .then(() => {
                         roleSeeds();
                         userSeeds();
                         muscleGroupSeeds();
                         exerciseTypeSeeds();
+                        focusSeeds();
                         console.log("YAY");
                     })
                     .catch(error => {

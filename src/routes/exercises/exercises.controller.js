@@ -4,18 +4,21 @@ const Exercise = db.exercise;
 const User = db.user;
 const MuscleGroup = db.muscle_group;
 const ExerciseType = db.exercise_type;
+const Focus = db.focus;
 
 exports.getConstantData = async (req, res, next) => {
     console.log(req.params);
     try {
         const allExerciseTypes = await ExerciseType.find();
         const allMuscleGroups = await MuscleGroup.find();
+        const allFocuses = await Focus.find();
 
         return res.send({
             message: "Successfully retrieved data",
             data: {
                 exercise_types: allExerciseTypes,
-                muscle_groups: allMuscleGroups
+                muscle_groups: allMuscleGroups,
+                focuses: allFocuses
             }
         })
     } catch (error) {

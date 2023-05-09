@@ -15,6 +15,7 @@ db.muscle_group = require("./muscle_group.mongo");
 db.subscription = require("./subscription.mongo");
 db.tracked = require("./tracked.mongo");
 db.media = require("./media.mongo");
+db.focus = require("./focus.mongo");
 
 db.ROLES = ["ADMIN", "TRAINER", "USER"];
 

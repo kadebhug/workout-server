@@ -1,10 +1,11 @@
 const db = require("../models/index");
 const { passwordHash } = require('../services/encryption');
-const { ALL_ROLES, USERS, MUSCLE_GROUPS, EXERCISE_TYPES } = require('../constants/index');
+const { ALL_ROLES, USERS, MUSCLE_GROUPS, EXERCISE_TYPES, FOCUS } = require('../constants/index');
 const Role = db.role;
 const User = db.user;
 const MuscleGroup = db.muscle_group;
 const ExerciseType = db.exercise_type;
+const Focus = db.focus;
 
 const roleSeeds = () => {
     Role.estimatedDocumentCount((err, count) => {
@@ -116,10 +117,30 @@ const exerciseTypeSeeds = () => {
         }
     });
 }
+const focusSeeds = () => {
+    Focus.estimatedDocumentCount((err, count) => {
+        if (!err && count === 0) {
+            for (let index = 0; index < FOCUS.length; index++) {
+                const focus = FOCUS[index];
+                new Focus({
+                    display: focus.display,
+                    code: focus.code
+                }).save(err => {
+                    if (err) {
+                        console.log("error", err);
+                    }
+    
+                    console.log(`added ${focus.code} to Focus collection`);
+                });
+            }
+        }
+    });
+}
 
 module.exports = {
     roleSeeds,
     userSeeds,
     muscleGroupSeeds,
-    exerciseTypeSeeds
+    exerciseTypeSeeds,
+    focusSeeds
 }

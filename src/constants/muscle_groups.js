@@ -43,6 +43,11 @@ const MUSCLE_GROUPS = [
 
 MUSCLE_GROUPS.forEach((muscleGroup, index) => {
     muscleGroup.code = muscleGroup.display.toUpperCase()
+    // if(muscleGroup.display.includes(" ")) {
+    //     muscleGroup.code = muscleGroup.display.split(" ").join("_").toUpperCase();
+    // }else{
+    //     muscleGroup.code = muscleGroup.display.toUpperCase();
+    // }
 });
 
 module.exports = MUSCLE_GROUPS;
