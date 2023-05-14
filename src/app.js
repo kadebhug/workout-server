@@ -2,6 +2,10 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const swaggerUi = require('swagger-ui-express');
+
+// Swagger
+const swaggerDocument = require('./swagger_output.json');
 
 // Routes
 const authRouter = require('./routes/auth/auth.router');
@@ -20,6 +24,7 @@ app.use(morgan('dev'));
 app.use(express.json());// parse requests of content-type - application/json
 app.use(express.urlencoded({ extended: true }));// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, '..', 'public')));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/auth', authRouter);
 app.use('/user', userRouter);

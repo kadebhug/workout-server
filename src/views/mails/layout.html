@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        .header-top {
+            padding: 1rem;
+        }
+
+        .logo {
+            height: 4rem;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .btn-primary {
+            background-color: #0088ce;
+            color: white;
+            text-decoration: none;
+        }
+
+        .container,
+        .container-fluid,
+        .container-sm,
+        .container-md,
+        .container-lg,
+        .container-xl {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .col {
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+
+        .col-2 {
+            -ms-flex: 0 0 16.666667%;
+            flex: 0 0 16.666667%;
+            max-width: 16.666667%;
+        }
+
+        .col-10 {
+            -ms-flex: 0 0 83.333333%;
+            flex: 0 0 83.333333%;
+            max-width: 83.333333%;
+        }
+        .logo-store{
+            height:3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-10 ">
+                    LOGO
+                </div>
+            </div>
+        </div>
+    </header>
+    <hr>
+    <div class="content">
+        <p>Dear
+            {{#if data}}
+            {{data/name}}
+            {{/if}}
+        </p>
+        {{{body}}}
+    </div>
+    <div class="end-content">
+        <p>
+
+            Thank you,
+        </p>
+        <p>
+            Workout App
+        </p>
+    </div>
+    <hr>
+    {{#if data}}
+    <footer>
+        <div class="container">
+            <div class="row">
+                DOCUMENT
+            </div>
+        </div>
+    </footer>
+    {{/if}}
+</body>
+
+</html>

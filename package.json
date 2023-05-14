@@ -8,7 +8,11 @@
     "test-watch": "jest --watch",
     "start": "node src/server.js",
     "watch": "nodemon src/server.js",
-    "cluster": "pm2 start src/server.js -i max"
+    "cluster": "pm2 start src/server.js -i max",
+    "cluster-reload": "pm2 reload src/server.js all",
+    "cluster-stop": "pm2 stop src/server.js all",
+    "cluster-remove": "pm2 delete src/server.js all",
+    "swagger-gen": "node src/swagger.js"
   },
   "keywords": [],
   "author": "",
@@ -21,10 +25,14 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "handlebars": "^4.7.7",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.7.2",
     "morgan": "^1.10.0",
-    "pm2": "^5.2.2"
+    "nodemailer": "^6.9.2",
+    "pm2": "^5.2.2",
+    "swagger-autogen": "^2.23.1",
+    "swagger-ui-express": "^4.6.3"
   },
   "devDependencies": {
     "jest": "^29.3.1",
